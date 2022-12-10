@@ -1,0 +1,61 @@
+
+
+
+
+if __name__ == '__main__':
+	register_val = 1
+	values = []
+	cycle = 0
+	new_val = None
+	while True:
+		try:
+			line = list(input().split())
+			print(line)
+			if len(line) == 2:
+				ins, val = line
+				val = int(val)
+			else:
+				ins = line[0]
+			
+			if ins == "noop":
+				if len(values) == 0:
+					values.append(1)
+				else:
+					if new_val is None:
+						values.append(values[-1])
+					else:
+						values.append(new_val)
+				cycle += 1
+				new_val = None
+			else:
+				if new_val is None:
+					if len(values) == 0:
+						values.append(1)
+					else:
+						values.append(values[-1])	
+				else:
+					values.append(new_val)
+				
+				values.append(values[-1])	
+				#values.append(new_val)
+				new_val = values[-1] + val
+				cycle += 2
+			print("cycle:", cycle)
+			print(values)
+		except Exception as e:
+			print(e.args)
+			break
+	
+
+	print(new_val)
+	print(values[20])
+	print(values[60])
+	print(values[100])
+	print(values[140])
+	print(values[180])
+	print(values[220])
+
+
+	print("total:", values[19] * 20 + values[59] * 60 + values[99] * 100 + values[139] * 140 +
+					values[179]	* 180 + values[219] * 220)
+	
